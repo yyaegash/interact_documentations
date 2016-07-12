@@ -116,6 +116,77 @@ Save the `token`, it’s will be asked for the next requests.
                 }
               }
 
+# Group Keyword
+## Store Data [/api/v1/data]
+### Create Keyword [POST]
+Create keyword and use it in your application.
+You must be logged with your developer or researcher account to create a new keyword on web site or use your secret api key to create one with the API. Check your settings to get your api_key
+
+* **api_key**: `d59bc5349760f84e231a9efed206` (string, required) - Your api_key
+* **key**: `typo` (string, required) - A single word to describe your data
+* **description**: `Exercice which count typo number`(text, required) - A description
+* **fields_attributes**: `[]` (array, required) - All fields values. See example below
+
++ Attributes
+    + keyword (object)
+        + api_key: "d59bc5349760f84e231a9efed206" (string, required) - Your api_key
+        + key: "typo" (string, required) - A single word to describe your data
+        + description: "Exercice which count typo number" (string, required) - A description
+        + fields_attributes: "[]" (array, required) - A description
+
+        + user_token: "4a2984bdc5c1f559fa86ca633d899f9039a0" (string, required) - The user token received
+        + data: "{'key': 'value'}" (object, required) - `key` belongs to Keword collection and `value` belongs to `keyword`
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+        {
+            "keyword":{
+                "key": "typo",
+                "description": "number of typo",
+                "fields_attributes":[
+                        {
+                            "key": "sentence_length",
+                            "description": "length in char", 
+                            "_type": "integer",
+                            "is_required": "true"
+                        },
+                        {
+                            "key": "sentence",
+                            "description": "Une phrase qui fait cinquante caractères au total", 
+                            "_type": "string",
+                            "is_required": "true"
+                        },
+                        {
+                            "key": "typo",
+                            "description": "number of typos",
+                            "_type": "integer",
+                            "is_required": "true"
+                        },
+                        {
+                            "key": "duration",
+                            "description": "time to write in minute",
+                            "_type": "integer",
+                            "is_required": "true"
+                        },
+                        {
+                            "key": "is_done",
+                            "description": "exercice completed",
+                            "_type": "boolean",
+                            "is_required": "false"
+                        }
+                        
+                    ]
+            }
+        }
+
+
+
+
 # Group Data
 ## Store Data [/api/v1/data]
 ### Create Data [POST]
@@ -170,7 +241,7 @@ Create data from your user.
               ]
 
 ## Get user actions [/api/v1/data/user_actions]
-### Create Data [POST]
+### Get user actions Data [POST]
 Collect all actions from specific user
 
 * **client_id**: `d59bc5349760bb8d917e711a9efed206` (string, required) - Your client id
@@ -316,4 +387,3 @@ Return 30 records randomly selected. All requests below 10 records could not be 
                   "event_at": true
                 }
               }
-            }
